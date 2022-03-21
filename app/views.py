@@ -5,8 +5,13 @@ Werkzeug Documentation:  https://werkzeug.palletsprojects.com/
 This file creates your application.
 """
 
-from app import app
-from flask import render_template, request, redirect, url_for
+from app import app,db
+from flask import render_template, request, redirect, url_for, flash, send_from_directory, session 
+from app.forms import PropertyForm
+from app.models import Property
+from werkzeug.utils import secure_filename
+import os
+import psycopg2
 
 
 ###
@@ -24,11 +29,53 @@ def about():
     """Render the website's about page."""
     return render_template('about.html', name="Mary Jane")
 
+@app.route('/properties/create', methods=['GET', 'POST'])
+def new_properties():
+    form = PropertyForm()
+
+    if request.method == "POST":
+        if form.validate_on_submit():
+            property_title=form.property_title.data
+            description=form.description.data
+            bedrooms = form.bedrooms.data
+            bathrooms = form.bathrooms.data
+            price = form.price.data
+            property_type = form.property_type.data
+            location = form.location.data
+            photo = form.photo.data
+            filename = secure_filename(photo.filename)
+            photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+            myproperty = Property(property_title,description, bedrooms, bathrooms, price, property_type, location, filename)
+            db.session.add(myproperty)
+            db.session.commit()
+            flash('New Property Added Successfull!', 'success')
+        else:
+            flash_errors(form)
+        return render_template('property.html', form=form)        
+
+def connect_db():
+    return psycopg2.connect(host="localhost", database="project1", user="project1.", password="pwproject1")
+    
+@app.route('/properties/')
+def list_properties():
+    properties = Property.query.all()
+    return render_template('properties.html', properties=properties)
+
+@app.route('/properties/<propertyid>')
+def specific_property(property_id):
+    property_id = int(property_id)
+    my_property = Property.query.filter_by(id=property_id).first()
+
+    return render_template('individual_property.html', property=my_property)
 
 ###
 # The functions below should be applicable to all Flask apps.
 ###
-
+@app.route('/uploads/<filename>')
+def get_uploaded_images(filename):
+    rootdir = os.getcwd()
+    return send_from_directory(os.path.join(rootdir, app.config['UPLOAD_FOLDER']),filename)
 # Display Flask WTF errors as Flash messages
 def flash_errors(form):
     for field, errors in form.errors.items():
