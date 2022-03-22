@@ -13,3 +13,17 @@ python-dotenv
 # Production Server
 # ----------------------
 gunicorn
+click==8.0.4
+itsdangerous==2.1.0
+Jinja2==3.0.3
+MarkupSafe==2.1.0
+Mako
+python-dateutil
+python-editor
+six
+SQLAlchemy
+Werkzeug 
+WTForms
+alembic
+Flask-Script
+

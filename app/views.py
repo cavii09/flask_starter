@@ -49,10 +49,10 @@ def new_property():
             myproperty = Property(property_title,description, bedrooms, bathrooms, price, property_type, location, filename)
             db.session.add(myproperty)
             db.session.commit()
-            flash('New Property Added Successfull!', 'success')
+        flash('New Property Added Successfull!', 'success')
     else:
         flash_errors(form)
-    return render_template('property.html', form=form)        
+    return render_template('properties.html', form=form)        
 
     
 @app.route('/properties/')
