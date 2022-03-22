@@ -11,7 +11,7 @@ from app.forms import PropertyForm
 from app.models import Property
 from werkzeug.utils import secure_filename
 import os
-import psycopg2
+
 
 
 ###
@@ -30,7 +30,7 @@ def about():
     return render_template('about.html', name="Mary Jane")
 
 @app.route('/properties/create', methods=['GET', 'POST'])
-def new_properties():
+def new_property():
     form = PropertyForm()
 
     if request.method == "POST":
@@ -50,30 +50,25 @@ def new_properties():
             db.session.add(myproperty)
             db.session.commit()
             flash('New Property Added Successfull!', 'success')
-        else:
-            flash_errors(form)
-        return render_template('property.html', form=form)        
+    else:
+        flash_errors(form)
+    return render_template('property.html', form=form)        
 
-def connect_db():
-    return psycopg2.connect(host="localhost", database="project1", user="project1.", password="pwproject1")
     
 @app.route('/properties/')
 def list_properties():
-    properties = Property.query.all()
-    return render_template('properties.html', properties=properties)
+    return render_template('properties.html', properties= Property.query.all())
 
 @app.route('/properties/<propertyid>')
-def specific_property(property_id):
-    property_id = int(property_id)
-    my_property = Property.query.filter_by(id=property_id).first()
-
+def specific_property(propertyid):
+    my_property = Property.query.filter_by(id=propertyid).first()
     return render_template('individual_property.html', property=my_property)
 
 ###
 # The functions below should be applicable to all Flask apps.
 ###
 @app.route('/uploads/<filename>')
-def get_uploaded_images(filename):
+def get_images(filename):
     rootdir = os.getcwd()
     return send_from_directory(os.path.join(rootdir, app.config['UPLOAD_FOLDER']),filename)
 # Display Flask WTF errors as Flash messages

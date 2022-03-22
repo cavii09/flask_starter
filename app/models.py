@@ -9,7 +9,7 @@ class Property(db.Model):
 
     id = db.Column(db.Integer, primary_key=True) 
     property_title= db.Column(db.String(80))
-    description = db.Column(db.String(80))
+    description = db.Column(db.String(255))
     bedrooms = db.Column(db.String(80))
     bathrooms = db.Column(db.String(255))
     price = db.Column(db.String(255))
@@ -17,13 +17,11 @@ class Property(db.Model):
     location = db.Column(db.String(255), unique=True)
     photo = db.Column(db.String(255))
 
-    
-
-    def __init__(self, id, property_title, description, num_bedrooms, num_bathrooms, price, property_type, location, photo):
+    def __init__(self, property_title, description, bedrooms, bathrooms, price, property_type, location, photo):
         self.property_title = property_title
         self.description = description
-        self.num_bedrooms = num_bathrooms
-        self.num_bathrooms = num_bathrooms
+        self.bedrooms = bedrooms
+        self.bathrooms = bathrooms
         self.price = price 
         self.property_type = property_type
         self.location = location

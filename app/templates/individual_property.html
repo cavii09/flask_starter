@@ -6,20 +6,25 @@
 {% include 'flash_messages.html'%}
 
 <div class="individual">
-    <div class="image">
-        <img class = "property-images" src = "{{ url_for('get_uploaded_images', filename=property.photo) }}" alt ="Property photos"> 
+    <div class="images">
+        <img class = "property-images" src = "{{ url_for('get_images', filename=property.photo) }}" alt ="Property photos"> 
     </div>
     <div class="aside">
-        <p class="property_title">{{ property.title }}</p>
-     
-        <p class="description">{{ property.description }}</p> 
-       
-        <div class="aside">
-        <p class="bedroom">{{ property.bedrooms }}</p>
-        <p class="bathroom">{{ property.bathrooms }}</p>
+        <p class="title">{{ property.property_title }}</p>
+        <p class="description">{{ property.description }}</p>
+      
+        <div class="center">
+        <p class="price">{{ property.price }}</p>
+        <p class="property_type">{{ property.property_type }}</p>
         </div>
-        
-        <p class="location">{{ property.location }}</p>
+
+         
+        <div class="propertyroom">
+        <p class="bedroom"><img src="/static/bed.png">{{ property.bedrooms }}</p>
+        <p class="bathroom"><img src="/static/bath.png">{{ property.bathrooms }}</p>
+        </div>
+      
+        <p class="location"><img src="/static/location.png">{{ property.location }}</p>
 
         <button class="btn">Email Realtor</button>
     </div>    

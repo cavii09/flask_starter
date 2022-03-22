@@ -1,3 +1,143 @@
 body {
     padding-top: 5rem;
 }
+
+.main {
+display: grid;
+grid-template-columns: auto auto auto;
+grid-template-rows: auto;
+gap: 20px;
+}
+
+.pro{
+    display: flex;
+    flex-direction: column;
+    box-shadow: 1px 1px 1px #a3a3a3;
+    background-color: #ffffff;
+    width:250px; 
+}
+.pro img{
+    width: 100%;
+    height: 200px;
+    margin-bottom: 10px;
+}
+.pro .title{
+    font-style: bold;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+.pro .location{
+    margin-bottom: 10px;
+    margin-left: 10px;
+    color: #808080;
+}
+.pro .price{
+    background-color: #000fff;
+    border-radius: 15px;
+    padding: 5px 10px;
+    width: fit-content;
+    color: #ffffff;
+    margin-left: 10px;
+    margin-bottom: 10px;
+
+}
+
+.pro .move-to{
+    background-color: green;
+    text-align: center;
+    padding: 10px;
+    color: #ffffff;
+    width: 100% ;
+    text-decoration:none;
+}
+
+.page-header{
+    margin: 20px 0px;
+}
+
+.pty-form{
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+.pty-form .form-inputs{
+    border-radius: 5px;
+    width:auto;
+    padding: 5px;
+}
+.btn{
+    background-color: blue;
+    color:#ffffff;
+    width: fit-content;
+    
+}
+.form-group{
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.propertyrooms{
+    column-count: 2;
+    gap: 10px;
+}
+ 
+.propertyitem{
+    column-count: 2;
+    gap: 10px; 
+}
+
+.individual{
+    display:flex;
+    flex-direction: row;
+    width: 600px;
+    min-height: 300px;
+}
+
+
+.aside{
+    display:flex;
+    flex-direction: column;
+    margin: 15px 0px 15px 10px;
+    columns:2;
+}
+.center{
+    column-count: 2;
+    padding: 25px;
+}
+.center .property_type{
+    width: 50px;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: orange;
+    color: #ffffff;
+}
+.center .price{
+    background-color: #000fff;
+    color: #ffffff;
+    border-radius: 10px;
+    padding: 5px;
+    width: 85px;
+}
+.individual .property-images{
+    width:100%;
+    height:100%;
+}
+.individual .title{
+    font-weight: bold;
+}
+.aside .btn{
+    width: fit-content;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+img{
+    width:25px;
+    height:25px;
+}
+.propertyroom{
+    column-count: 2;
+    
+}
